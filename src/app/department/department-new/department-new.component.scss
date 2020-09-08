@@ -1,0 +1,31 @@
+h2{
+  margin-top: 2rem;
+  text-align: center;
+  text-transform: uppercase;
+  color: #c2185b;
+}
+
+form{
+  margin-top: 3rem;
+  margin-left: 30rem;
+  margin-right: 30rem;
+  background-color: #424242;
+  border-radius: 4px;
+
+  .normal-form{
+    text-align: center;
+  }
+}
+
+.controles-container{
+  width: 100%;
+  padding: 5%;
+}
+
+.controles-container > *{
+  width: 100%;
+}
+
+.add-bottom-padding {
+  padding-top: 10px;
+}

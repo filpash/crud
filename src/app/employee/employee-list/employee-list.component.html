@@ -1,0 +1,57 @@
+<h1>Employees</h1>
+<p>clicked position in the table</p>
+<table mat-table [dataSource]="dataSource" matSort>
+  <ng-container matColumnDef="position">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Position</th>
+    <th mat-header-cell *matCellDef="let employees">
+      <a [routerLink]="['/employee', employees.position]">
+        {{employees.position}}
+      </a>
+    </th>
+  </ng-container>
+
+  <ng-container matColumnDef="firstName">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>First Name</th>
+    <th mat-header-cell *matCellDef="let employees">
+      {{employees.firstName}}
+    </th>
+  </ng-container>
+
+  <ng-container matColumnDef="lastName">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Last Name</th>
+    <th mat-header-cell *matCellDef="let employees">
+      {{employees.lastName}}
+    </th>
+  </ng-container>
+
+  <ng-container matColumnDef="email">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Email</th>
+    <th mat-header-cell *matCellDef="let employees">
+      {{employees.email}}
+    </th>
+  </ng-container>
+
+  <ng-container matColumnDef="departmentID">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Department ID</th>
+    <th mat-header-cell *matCellDef="let employees">
+      {{employees.departmentID}}
+    </th>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
+<div class="container">
+  <mat-paginator #paginator [pageSize]="3" [pageSizeOptions]="[1, 2, 3]">
+  </mat-paginator>
+</div>
+
+<p>clicked Add button for add new employee</p>
+
+<div class="example-button-item">
+  <button routerLink="/employee-new" class="example-button-item" mat-flat-button color="accent"  routerLinkActive="active">
+    <mat-icon>add</mat-icon> Add
+  </button>
+</div>
+

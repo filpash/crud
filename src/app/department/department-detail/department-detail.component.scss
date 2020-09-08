@@ -1,0 +1,79 @@
+h2{
+  text-align: center;
+  text-transform: uppercase;
+  color: #c2185b;
+  margin-top: 3rem;
+}
+
+table {
+  margin-left: 20rem;
+  margin-right: 20rem;
+  width: 60%;
+}
+
+mat-card{
+  width: 35%;
+  margin-right: 28rem;
+  margin-left: 38rem;
+}
+
+.employee__items{
+  margin-top: 2rem;
+}
+
+.btn__employee{
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.btn-item__employee{
+  width: 37%;
+}
+
+.container {
+  margin-left: 38rem;
+  margin-right: 38rem;
+}
+
+.container-btn {
+  margin-left: 28rem;
+  margin-right: 28rem;
+  text-align: center;
+}
+
+.department__employee-item{
+  text-align: center;
+  background-color: #424242;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+
+  span{
+    color: #c2185b;
+  }
+}
+
+.department__employee-item:hover{
+  background-color: #c2185b;
+  transition: all .2s linear;
+
+  span{
+    color: #424242;
+    font-weight: bold;
+  }
+}
+
+a{
+  text-decoration: none;
+  color: #ffffff;
+}
+
+li {
+  list-style: none;
+}
+
+.example-button-item {
+  margin-top: 2rem;
+  text-align: justify;
+}

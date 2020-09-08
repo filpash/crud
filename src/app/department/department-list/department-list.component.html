@@ -1,0 +1,43 @@
+<h1>Department</h1>
+<p>clicked position in the table</p>
+<table mat-table [dataSource]="dataSource" matSort>
+  <ng-container matColumnDef="position">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Position</th>
+    <th mat-header-cell *matCellDef="let departments">
+      <a [routerLink]="['/department', departments.position]">
+        {{departments.position}}
+      </a>
+    </th>
+  </ng-container>
+
+  <ng-container matColumnDef="firstName">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>First Name</th>
+    <th mat-header-cell *matCellDef="let departments">
+        {{departments.firstName}}
+    </th>
+  </ng-container>
+
+  <ng-container matColumnDef="departmentID">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Department ID</th>
+    <th mat-header-cell *matCellDef="let departments">
+        {{departments.departmentID}}
+    </th>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
+<div class="container">
+  <mat-paginator #paginator [pageSize]="3" [pageSizeOptions]="[1, 2, 3]">
+  </mat-paginator>
+</div>
+
+<p>clicked Add button for add new department</p>
+
+<div class="example-button-item">
+  <button routerLink="/department-new" class="example-button-item" mat-flat-button color="accent">
+    <mat-icon>add</mat-icon> Add
+  </button>
+</div>
+

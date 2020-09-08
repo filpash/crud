@@ -1,0 +1,26 @@
+<h2>Create New Department</h2>
+<form [formGroup]="service.form" class="normal-form">
+  <mat-grid-list cols="1" rowHeight="300px">
+    <mat-grid-tile>
+      <div class="controles-container">
+        <input type="hidden" formArrayName="position">
+        <mat-form-field>
+          <input formControlName="firstName" matInput placeholder="First Name*">
+          <mat-error *ngIf="service.form.controls['departmentID'].errors?.required">This field is mandatory</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input formControlName="departmentID" matInput placeholder="Department ID*">
+          <mat-error>This field is mandatory</mat-error>
+        </mat-form-field>
+
+        <div class="add-bottom-padding">
+          <button mat-raised-button color="warn" type="submit"
+                  [disabled]="service.form.invalid"
+                  (click)="onClear()"
+          >Add</button>
+        </div>
+      </div>
+    </mat-grid-tile>
+  </mat-grid-list>
+</form>

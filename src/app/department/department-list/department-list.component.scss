@@ -1,0 +1,37 @@
+h1{
+  text-align: center;
+  margin-top: 3rem;
+  text-transform: uppercase;
+  color: #c2185b;
+}
+
+p{
+  margin-top: 2rem;
+  text-align: center;
+}
+
+table {
+  margin-left: 20rem;
+  margin-right: 20rem;
+  width: 60%;
+}
+
+a{
+  text-decoration: none;
+  color: rgba(255,255,255,.7);
+  &:hover{
+    color: rgba(151, 186, 255, 0.7);
+  }
+}
+
+.example-button-item{
+  text-align: center;
+}
+
+mat-paginator{
+  margin-top: 2rem;
+  margin-right: 20rem;
+  margin-left: 20rem;
+  width: 60%;
+}
+
