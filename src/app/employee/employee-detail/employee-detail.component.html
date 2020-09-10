@@ -1,26 +1,37 @@
 <h2>Current Employee</h2>
 <mat-card *ngIf="employees">
-    <div>
-      <h3>Position: {{ employees.position }}</h3>
-    </div>
-    <div>
-      <label>First Name: </label>{{ employees.firstName }}</div>
-    <div>
-      <label>Last Name: </label>{{ employees.lastName }}</div>
-    <div>
-      <label>Email: </label>{{ employees.email }}</div>
-    <div>
-      <label>DepartmentID: </label>{{ employees.departmentID }}</div>
+  <div>
+    <h3>Position: {{ employees.id }}</h3>
+  </div>
+  <div>
+    <label>First Name: </label>{{ employees.firstName }}</div>
+  <div>
+    <label>Last Name: </label>{{ employees.lastName }}</div>
+  <div>
+    <label>Email: </label>{{ employees.email }}</div>
+  <div>
+    <label>Department Id: </label>{{ employees.departmentId }}</div>
+
+  <button
+    class="example-button-item"
+    mat-flat-button color="warn"
+    (click)="removeDepartment(employees)"
+  >
+    <mat-icon>delete</mat-icon> Remove
+  </button>
+  <button class="example-button-item" mat-flat-button color="accent">
+    <mat-icon>update</mat-icon> Update
+  </button>
+
 </mat-card>
 
 <h2>Department for Current Employee</h2>
 
 <div class="container">
   <ul class="employee__department-item">
-    <li *ngIf="department | async as departments">
-      <a routerLink="/department/{{departments.position}}">
-        <span>First Name:</span> {{departments.firstName}}
-        <span>Department ID:</span> {{departments.departmentID}}
+    <li *ngIf="department">
+      <a routerLink="/department/{{department.id}}">
+        <span>First Name:</span> {{department.firstName}}
       </a>
     </li>
   </ul>

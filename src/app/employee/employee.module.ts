@@ -17,6 +17,7 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {MatSelectModule} from '@angular/material/select';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
     ReactiveFormsModule,
     MatGridListModule,
     MatFormFieldModule,
-    BrowserAnimationsModule
+    MatSelectModule,
+    BrowserAnimationsModule,
   ]
 })
 export class EmployeeModule { }

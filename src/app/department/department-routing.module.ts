@@ -5,10 +5,11 @@ import { DepartmentDetailComponent } from "./department-detail/department-detail
 import {EmployeeDetailComponent} from "../employee/employee-detail/employee-detail.component";
 import {DepartmentNewComponent} from "./department-new/department-new.component";
 
-const departmentRoutes: Routes = [
+export const departmentRoutes: Routes = [
+  {path: '', redirectTo: 'department', pathMatch: 'full'},
   {path: 'department', component: DepartmentListComponent},
-  {path: 'department/:position', component: DepartmentDetailComponent},
-  {path: 'employee/:position', component: EmployeeDetailComponent},
+  {path: 'department/:id', component: DepartmentDetailComponent},
+  {path: 'employee/:id', component: EmployeeDetailComponent},
   {path: 'department-new', component: DepartmentNewComponent}
 ];
 

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {DepartmentService} from "../../department/department.service";
 import {EmployeeService} from "../employee.service";
+import {Employees} from "../employees";
 
 
 @Component({
@@ -9,6 +9,7 @@ import {EmployeeService} from "../employee.service";
   styleUrls: ['./employee-new.component.scss']
 })
 export class EmployeeNewComponent implements OnInit {
+  employees: Employees[];
 
   constructor(
     public service: EmployeeService
@@ -17,9 +18,13 @@ export class EmployeeNewComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onClear() {
+  add(firstName: string, lastName: string, email: string, departmentId: string | number): void {
+    if (!firstName && !lastName && !email && !departmentId) { return; }
+    this.service.addEmployee({firstName, lastName, email, departmentId} as Employees)
+      .subscribe(employee => {
+        this.employees.push(employee)
+      });
     this.service.form.reset();
     this.service.InitializeFormGrope();
   }
-
 }

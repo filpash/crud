@@ -3,31 +3,43 @@
   <mat-grid-list cols="1" rowHeight="300px">
     <mat-grid-tile>
       <div class="controles-container">
-        <input type="hidden" formArrayName="position">
+        <input type="hidden" formArrayName="id">
         <mat-form-field>
-          <input formControlName="firstName" matInput placeholder="First Name*">
+          <input #firstName formControlName="firstName" matInput placeholder="First Name*">
           <mat-error>First Name is mandatory</mat-error>
         </mat-form-field>
 
         <mat-form-field>
-          <input formControlName="lastName" matInput placeholder="Last Name*">
+          <input #lastName formControlName="lastName" matInput placeholder="Last Name*">
           <mat-error>Last Name is mandatory</mat-error>
         </mat-form-field>
 
         <mat-form-field>
-          <input formControlName="email" matInput placeholder="Email*">
+          <input #email formControlName="email" matInput placeholder="Email*">
           <mat-error>Email is mandatory</mat-error>
         </mat-form-field>
 
         <mat-form-field>
-          <input formControlName="departmentID" matInput placeholder="Department ID*">
-          <mat-error *ngIf="service.form.controls['departmentID'].errors?.required">This field is mandatory</mat-error>
+          <mat-select #departmentId formControlName="departmentId" placeholder="Department Id">
+            <ng-container>
+              <mat-option>1</mat-option>
+              <mat-option>2</mat-option>
+              <mat-option>3</mat-option>
+              <mat-option>4</mat-option>
+              <mat-option>5</mat-option>
+              <mat-option>6</mat-option>
+              <mat-option>7</mat-option>
+            </ng-container>
+          </mat-select>
         </mat-form-field>
 
         <div class="add-bottom-padding">
           <button mat-raised-button color="warn" type="submit"
                   [disabled]="service.form.invalid"
-                  (click)="onClear()"
+                  (click)="add(firstName.value,
+                    lastName.value,
+                    email.value,
+                    departmentId.value)"
           >Add</button>
         </div>
       </div>

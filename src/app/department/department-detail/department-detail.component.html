@@ -1,41 +1,36 @@
-<div class="container-btn" *ngIf="department | async as departments">
+<h2>Current Department</h2>
+
+<mat-card *ngIf="departments">
+  <div>
+    <h3>Position: {{ departments.id }}</h3>
+  </div>
+  <div>
+    <label>First Name: </label>{{ departments.firstName }}</div>
+
   <button
     class="example-button-item"
-    mat-flat-button color="warn"
-    (click)="removeDepartment(departments)"
-  >
+    mat-flat-button color="warn">
     <mat-icon>delete</mat-icon> Remove
   </button>
   <button class="example-button-item" mat-flat-button color="accent">
     <mat-icon>update</mat-icon> Update
   </button>
-</div>
 
-<h2>Current Department</h2>
-
-<mat-card *ngIf="department | async as departments">
-    <div>
-      <h3>Position: {{ departments.position }}</h3>
-    </div>
-    <div>
-      <label>First Name: </label>{{ departments.firstName }}</div>
-    <div>
-      <label>Department ID: </label>{{ departments.departmentID }}</div>
 </mat-card>
 
 <h2>Full Name for employee</h2>
 <div class="container">
   <ul class="department__employee-item">
-    <li *ngIf="employees | async as employees">
-      <a routerLink="/employee/{{employees.position}}">
+    <li *ngIf="employees">
+      <a routerLink="/employee/{{employees.id}}">
         <span>Full Name:</span> {{employees.firstName}} {{employees.lastName}}
         <span>Email:</span> {{employees.email}}
-        <span>Department ID:</span> {{employees.departmentID}}
+        <span>Department Id:</span> {{employees.departmentId}}
       </a>
     </li>
   </ul>
 </div>
 
-<div class="btn__employee" *ngIf="employees | async as employees">
+<div class="btn__employee" *ngIf="employees">
   <button class="btn-item__employee" mat-raised-button color="primary" (click)="gotoEmployeeDepartment(employees)">All Employees</button>
 </div>

@@ -25,6 +25,12 @@ button {
   margin-right: 38rem;
 }
 
+.container-btn {
+  margin-left: 28rem;
+  margin-right: 28rem;
+  text-align: center;
+}
+
 .employee__department-item{
   text-align: center;
   background-color: #424242;
@@ -55,5 +61,14 @@ a{
 
 li {
   list-style: none;
+}
+
+.example-button-item {
+  margin-top: 2rem;
+}
+
+button {
+  width: 20%;
+  margin-right: 10px;
 }
 

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 import {Observable, of} from 'rxjs';
 import { catchError, tap, map } from 'rxjs/operators';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Employees } from "./employees";
 import { MessageService } from '../message.service';
 import {Departments} from "../department/departments";
@@ -13,22 +13,23 @@ import { FormGroup, FormControl, Validators } from "@angular/forms";
   providedIn: 'root',
 })
 export class EmployeeService {
-  private employeeUrl = 'api/employee';
+  private employeeUrl = 'api/employees';
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
+
 
   constructor(
     private http: HttpClient,
     private messageService: MessageService) {}
 
   form: FormGroup = new FormGroup({
-    position: new FormControl(null),
+    id: new FormControl(null),
     firstName: new FormControl('', Validators.required),
     lastName: new FormControl('', Validators.required),
     email: new FormControl('', Validators.required),
-    departmentID: new FormControl(0, Validators.required)
+    departmentId: new FormControl(0)
   })
 
 
@@ -38,27 +39,27 @@ export class EmployeeService {
       .pipe(
         tap(_ => this.log('fetched employees')),
         catchError(this.handleError<Employees[]>('getEmployees', []))
-    )
+      )
   };
 
-  getEmployeeNo404<Data>(position: number): Observable<Employees> {
-    const url = `${this.employeeUrl}/?position=${position}`;
+  getEmployeeNo404<Data>(id: number): Observable<Employees> {
+    const url = `${this.employeeUrl}/?id=${id}`;
     return this.http.get<Employees[]>(url)
       .pipe(
         map(employees => employees[0]), // returns a {0|1} element array
         tap(e => {
           const outcome = e ? `fetched` : `did not find`;
-          this.log(`${outcome} employee position=${position}`);
+          this.log(`${outcome} employee id=${id}`);
         }),
-        catchError(this.handleError<Employees>(`getHero id=${position}`))
+        catchError(this.handleError<Employees>(`getEmployee id=${id}`))
       );
   }
 
-  getEmployee(position: number): Observable<Employees> {
-    const url = `${this.employeeUrl}/${position}`;
+  getEmployee(id: number): Observable<Employees> {
+    const url = `${this.employeeUrl}/${id}`;
     return this.http.get<Employees>(url).pipe(
-      tap(_ => this.log(`fetched employees position=${position}`)),
-      catchError(this.handleError<Employees>(`getEmployees position=${position}`))
+      tap(_ => this.log(`fetched employees id=${id}`)),
+      catchError(this.handleError<Employees>(`getEmployees id=${id}`))
     );
   }
 
@@ -67,25 +68,44 @@ export class EmployeeService {
     return of(DEPARTMENTS);
   };
 
-  getDepartment(position: number | string) {
+  getDepartment(id: number | string) {
     return this.getDepartments().pipe(
       map((departments: Departments[]) => departments
-        .find(department => department.position === +position))
+        .find(department => department.id === +id))
+    );
+  }
+
+  /** POST: add a new department to the server */
+  addEmployee(employee: Employees): Observable<Employees> {
+    return this.http.post<Employees>(this.employeeUrl, employee, this.httpOptions).pipe(
+      tap((newEmployee: Employees) => this.log(`added employee w/ id=${newEmployee.id}`)),
+        catchError(this.handleError<Employees>('addEmployee'))
+    );
+  }
+
+  /** DELETE: delete the employee from the server */
+  deleteEmployee(employee: Employees | number): Observable<Employees> {
+    const id = typeof employee === 'number' ? employee : employee.id;
+    const url = `${this.employeeUrl}/${id}`;
+
+    return this.http.delete<Employees>(url, this.httpOptions).pipe(
+      tap(_ => this.log(`deleted employee id=${id}`)),
+      catchError(this.handleError<Employees>('deleteEmployee'))
     );
   }
 
   InitializeFormGrope(){
     this.form.setValue({
-      position: null,
+      id: null,
       firstName: '',
       lastName: '',
       email: '',
-      departmentID: 0
+      departmentId: 0
     })
   }
 
   private log(message: string) {
-    this.messageService.add(`HeroService: ${message}`);
+    this.messageService.add(`EmployeeService: ${message}`);
   }
 
   private handleError<T>(operation = 'operation', result?: T) {
