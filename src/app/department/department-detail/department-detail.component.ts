@@ -42,6 +42,14 @@ export class DepartmentDetailComponent implements OnInit {
     this.router.navigate([`/employee/`]);
   }
 
+  delete(id): void {
+    this.service.deleteDepartment(id).subscribe(value => {
+      this.router.navigateByUrl('/department')
+    });
+  }
 
+  update():void{
+    this.router.navigateByUrl('/department')
+  }
 
 }

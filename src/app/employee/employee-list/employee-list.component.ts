@@ -15,7 +15,7 @@ export class EmployeeListComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
 
   employees: Employees[];
-  displayedColumns: string[] = ['id', 'firstName', 'lastName', 'email', 'departmentId', 'action'];
+  displayedColumns: string[] = ['id', 'firstName', 'lastName', 'email', 'departmentId'];
 
   constructor(public service: EmployeeService) { }
 

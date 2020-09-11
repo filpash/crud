@@ -1,8 +1,8 @@
 <h1>Department</h1>
 <p>clicked position in the table</p>
-<table mat-table [dataSource]="departments">
+<table mat-table [dataSource]="departments" matSort>
   <ng-container matColumnDef="id">
-    <th mat-header-cell *matHeaderCellDef>Position</th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Position</th>
     <td mat-cell *matCellDef="let departments">
       <a [routerLink]="['/department', departments.id]">
         {{departments.id}}
@@ -10,19 +10,9 @@
     </td>
   </ng-container>
 
-  <ng-container matColumnDef="firstName">
-    <th mat-header-cell *matHeaderCellDef>First Name</th>
-    <td mat-cell *matCellDef="let departments">{{departments.firstName}}</td>
-  </ng-container>
-
-  <ng-container matColumnDef="action">
-    <th mat-header-cell *matHeaderCellDef> Action </th>
-    <td mat-cell *matCellDef="let departments" class="action-link">
-      <button mat-icon-button color="warn"
-              (click)="delete(departments)">
-        <mat-icon>delete</mat-icon>
-      </button>
-    </td>
+  <ng-container matColumnDef="departmentId">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>DepartmentId</th>
+    <td mat-cell *matCellDef="let departments">{{departments.departmentId}}</td>
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

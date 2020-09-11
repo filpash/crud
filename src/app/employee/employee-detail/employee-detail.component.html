@@ -15,11 +15,11 @@
   <button
     class="example-button-item"
     mat-flat-button color="warn"
-    (click)="removeDepartment(employees)"
-  >
+  (click)="delete(employees.id)">
     <mat-icon>delete</mat-icon> Remove
   </button>
-  <button class="example-button-item" mat-flat-button color="accent">
+  <button class="example-button-item" mat-flat-button color="accent"
+  (click)="update()">
     <mat-icon>update</mat-icon> Update
   </button>
 
@@ -30,8 +30,8 @@
 <div class="container">
   <ul class="employee__department-item">
     <li *ngIf="department">
-      <a routerLink="/department/{{department.id}}">
-        <span>First Name:</span> {{department.firstName}}
+      <a routerLink="/department/{{department.departmentId}}">
+        <span>Department Id:</span> {{department.departmentId}}
       </a>
     </li>
   </ul>

@@ -76,7 +76,7 @@ export class EmployeeService {
   }
 
   /** POST: add a new department to the server */
-  addEmployee(employee: Employees): Observable<Employees> {
+  addEmployee(employee: { firstName: string; lastName: string; departmentId: string | number; id: number; email: string }): Observable<Employees> {
     return this.http.post<Employees>(this.employeeUrl, employee, this.httpOptions).pipe(
       tap((newEmployee: Employees) => this.log(`added employee w/ id=${newEmployee.id}`)),
         catchError(this.handleError<Employees>('addEmployee'))
@@ -84,13 +84,13 @@ export class EmployeeService {
   }
 
   /** DELETE: delete the employee from the server */
-  deleteEmployee(employee: Employees | number): Observable<Employees> {
+  deleteEmployee(employee: Employees | number): Observable<boolean> {
     const id = typeof employee === 'number' ? employee : employee.id;
     const url = `${this.employeeUrl}/${id}`;
 
-    return this.http.delete<Employees>(url, this.httpOptions).pipe(
+    return this.http.delete<boolean>(url, this.httpOptions).pipe(
       tap(_ => this.log(`deleted employee id=${id}`)),
-      catchError(this.handleError<Employees>('deleteEmployee'))
+      catchError(this.handleError<boolean>('deleteEmployee'))
     );
   }
 

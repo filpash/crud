@@ -1,11 +1,11 @@
 import { Departments } from "./departments";
 
 export const DEPARTMENTS: Departments[] = [
-  { id: 1, firstName: 'David'},
-  { id: 2, firstName: 'John'},
-  { id: 3, firstName: 'Jim'},
-  { id: 4, firstName: 'Dik'},
-  { id: 5, firstName: 'Natasha'},
-  { id: 6, firstName: 'Rick'},
-  { id: 7, firstName: 'Din'},
+  { id: 1, departmentId: 1},
+  { id: 2, departmentId: 2},
+  { id: 3, departmentId: 3},
+  { id: 4, departmentId: 4},
+  { id: 5, departmentId: 5},
+  { id: 6, departmentId: 6},
+  { id: 7, departmentId: 7},
 ];

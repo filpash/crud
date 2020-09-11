@@ -6,7 +6,7 @@ import {catchError, map, tap} from 'rxjs/operators';
 import {Departments} from "./departments";
 import { MessageService } from '../message.service';
 import {Employees} from "../employee/employees";
-import { FormGroup, FormControl, Validators } from "@angular/forms";
+import { FormGroup, FormControl} from "@angular/forms";
 
 @Injectable({
   providedIn: 'root',
@@ -25,8 +25,7 @@ export class DepartmentService {
 
   form: FormGroup = new FormGroup({
     id: new FormControl(null),
-    firstName: new FormControl('', Validators.required),
-    departmentId: new FormControl(0)
+    departmentId: new FormControl('')
   })
 
   getDepartments(): Observable<Departments[]> {
@@ -72,21 +71,20 @@ export class DepartmentService {
   }
 
   /** DELETE: delete the department from the server */
-  deleteDepartment(department: Departments | number): Observable<Departments> {
+  deleteDepartment(department: Departments | number): Observable<boolean> {
     const id = typeof department === 'number' ? department : department.id;
     const url = `${this.departmentUrl}/${id}`;
 
-    return this.http.delete<Departments>(url, this.httpOptions).pipe(
+    return this.http.delete<boolean>(url, this.httpOptions).pipe(
       tap(_ => this.log(`deleted department id=${id}`)),
-      catchError(this.handleError<Departments>('deleteDepartment'))
+      catchError(this.handleError<boolean>('deleteDepartment'))
     );
   }
 
   InitializeFormGrope(){
     this.form.setValue({
       id: null,
-      firstName: '',
-      departmentId: 0
+      departmentId: ''
     })
   }
 

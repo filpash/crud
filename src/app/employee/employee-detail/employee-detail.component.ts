@@ -3,6 +3,7 @@ import {Employees} from "../employees";
 import {ActivatedRoute, Router} from "@angular/router";
 import {EmployeeService} from "../employee.service";
 import {Departments} from "../../department/departments";
+import {DepartmentService} from "../../department/department.service";
 
 @Component({
   selector: 'app-employee-detail',
@@ -16,7 +17,8 @@ export class EmployeeDetailComponent implements OnInit {
   constructor(
     public route: ActivatedRoute,
     public router: Router,
-    public service: EmployeeService
+    public service: EmployeeService,
+    public service2: DepartmentService
   ) { }
 
   ngOnInit(): void {
@@ -32,7 +34,17 @@ export class EmployeeDetailComponent implements OnInit {
 
   getDepartments(): void {
     const id = +this.route.snapshot.paramMap.get('id');
-    this.service.getDepartment(id)
+    this.service2.getDepartment(id)
       .subscribe(department => this.department = department);
+  }
+
+  delete(id): void{
+    this.service.deleteEmployee(id).subscribe(value => {
+      this.router.navigateByUrl('/employee')
+    })
+  }
+
+  update(): void{
+    this.router.navigateByUrl('/employee')
   }
 }

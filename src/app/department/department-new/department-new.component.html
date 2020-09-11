@@ -4,15 +4,22 @@
     <mat-grid-tile>
       <div class="controles-container">
         <input type="hidden" formArrayName="id">
+<!--        <mat-form-field>-->
+<!--          <input #departmentId formControlName="departmentId" matInput placeholder="Department Id">-->
+<!--        </mat-form-field>-->
         <mat-form-field>
-          <input #firstName formControlName="firstName" matInput placeholder="First Name*">
-          <mat-error *ngIf="service.form.controls['firstName'].errors?.required">This field is mandatory</mat-error>
+          <mat-select #departmentId formControlName="departmentId" placeholder="Department Id">
+            <mat-option>None</mat-option>
+            <ng-container>
+              <mat-option *ngFor="let department of departments" [value]="department.id">{{department.departmentId}}</mat-option>
+            </ng-container>
+          </mat-select>
         </mat-form-field>
 
         <div class="add-bottom-padding">
           <button mat-raised-button color="warn" type="submit"
                   [disabled]="service.form.invalid"
-                  (click)="add(firstName.value)"
+                  (click)="add(departmentId.value)"
           >Add</button>
         </div>
       </div>

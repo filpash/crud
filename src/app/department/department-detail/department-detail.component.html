@@ -5,14 +5,16 @@
     <h3>Position: {{ departments.id }}</h3>
   </div>
   <div>
-    <label>First Name: </label>{{ departments.firstName }}</div>
+    <label>Department Id: </label>{{ departments.departmentId }}</div>
 
   <button
     class="example-button-item"
-    mat-flat-button color="warn">
+    mat-flat-button color="warn"
+    (click)="delete(departments.id)">
     <mat-icon>delete</mat-icon> Remove
   </button>
-  <button class="example-button-item" mat-flat-button color="accent">
+  <button class="example-button-item" mat-flat-button color="accent"
+  (click)="update()">
     <mat-icon>update</mat-icon> Update
   </button>
 
@@ -22,7 +24,7 @@
 <div class="container">
   <ul class="department__employee-item">
     <li *ngIf="employees">
-      <a routerLink="/employee/{{employees.id}}">
+      <a routerLink="/employee/{{employees.departmentId}}">
         <span>Full Name:</span> {{employees.firstName}} {{employees.lastName}}
         <span>Email:</span> {{employees.email}}
         <span>Department Id:</span> {{employees.departmentId}}
