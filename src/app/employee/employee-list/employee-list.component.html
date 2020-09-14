@@ -1,5 +1,5 @@
 <h1>Employees</h1>
-<p>clicked position in the table</p>
+<p>click position on the table</p>
 <table mat-table [dataSource]="employees">
   <ng-container matColumnDef="id">
     <th mat-header-cell *matHeaderCellDef>Position</th>
@@ -34,7 +34,7 @@
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
 
-<p>clicked Add button for add new employee</p>
+<p>click Add button for add new employee</p>
 
 <div class="example-button-item">
   <button routerLink="/employee-new" class="example-button-item" mat-flat-button color="accent"  routerLinkActive="active">

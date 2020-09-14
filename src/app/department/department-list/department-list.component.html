@@ -1,5 +1,5 @@
 <h1>Department</h1>
-<p>clicked position in the table</p>
+<p>click position on the table</p>
 <table mat-table [dataSource]="departments" matSort>
   <ng-container matColumnDef="id">
     <th mat-header-cell *matHeaderCellDef mat-sort-header>Position</th>
@@ -19,7 +19,7 @@
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
 
-<p>clicked Add button for add new department</p>
+<p>click Add button for add new department</p>
 
 <div class="example-button-item">
   <button routerLink="/department-new" class="example-button-item" mat-flat-button color="accent">
