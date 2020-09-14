@@ -7,7 +7,6 @@ import { Employees } from "./employees";
 import { MessageService } from '../message.service';
 import {Departments} from "../department/departments";
 import {DEPARTMENTS} from "../department/mock-departments";
-import { FormGroup, FormControl, Validators } from "@angular/forms";
 
 @Injectable({
   providedIn: 'root',
@@ -19,20 +18,11 @@ export class EmployeeService {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
 
-
   constructor(
     private http: HttpClient,
     private messageService: MessageService) {}
 
-  form: FormGroup = new FormGroup({
-    id: new FormControl(null),
-    firstName: new FormControl('', Validators.required),
-    lastName: new FormControl('', Validators.required),
-    email: new FormControl('', Validators.required),
-    departmentId: new FormControl(0)
-  })
-
-
+  /** Get Employees in InMemoryDataService*/
   getEmployees(): Observable<Employees[]> {
     this.messageService.add('EmployeeService: fetched employees');
     return this.http.get<Employees[]>(this.employeeUrl)
@@ -42,6 +32,16 @@ export class EmployeeService {
       )
   };
 
+  /** Get Employee in InMemoryDataService*/
+  getEmployee(id: number): Observable<Employees> {
+    const url = `${this.employeeUrl}/${id}`;
+    return this.http.get<Employees>(url).pipe(
+      tap(_ => this.log(`fetched employees id=${id}`)),
+      catchError(this.handleError<Employees>(`getEmployees id=${id}`))
+    );
+  }
+
+  /** Get message if getData in memory can't find data*/
   getEmployeeNo404<Data>(id: number): Observable<Employees> {
     const url = `${this.employeeUrl}/?id=${id}`;
     return this.http.get<Employees[]>(url)
@@ -55,31 +55,16 @@ export class EmployeeService {
       );
   }
 
-  getEmployee(id: number): Observable<Employees> {
-    const url = `${this.employeeUrl}/${id}`;
-    return this.http.get<Employees>(url).pipe(
-      tap(_ => this.log(`fetched employees id=${id}`)),
-      catchError(this.handleError<Employees>(`getEmployees id=${id}`))
-    );
-  }
-
-  getDepartments = (): Observable<Departments[]> => {
-    this.messageService.add('EmployeeService: fetched departments');
-    return of(DEPARTMENTS);
-  };
-
-  getDepartment(id: number | string) {
-    return this.getDepartments().pipe(
-      map((departments: Departments[]) => departments
-        .find(department => department.id === +id))
-    );
-  }
-
   /** POST: add a new department to the server */
-  addEmployee(employee: { firstName: string; lastName: string; departmentId: string | number; id: number; email: string }): Observable<Employees> {
+  addEmployee(employee:
+                {id: number;
+                firstName: string;
+                lastName: string;
+                email: string;
+                departmentId: string | number; }): Observable<Employees> {
     return this.http.post<Employees>(this.employeeUrl, employee, this.httpOptions).pipe(
       tap((newEmployee: Employees) => this.log(`added employee w/ id=${newEmployee.id}`)),
-        catchError(this.handleError<Employees>('addEmployee'))
+      catchError(this.handleError<Employees>('addEmployee'))
     );
   }
 
@@ -94,14 +79,16 @@ export class EmployeeService {
     );
   }
 
-  InitializeFormGrope(){
-    this.form.setValue({
-      id: null,
-      firstName: '',
-      lastName: '',
-      email: '',
-      departmentId: 0
-    })
+  getDepartments = (): Observable<Departments[]> => {
+    this.messageService.add('EmployeeService: fetched departments');
+    return of(DEPARTMENTS);
+  };
+
+  getDepartment(id: number | string) {
+    return this.getDepartments().pipe(
+      map((departments: Departments[]) => departments
+        .find(department => department.id === +id))
+    );
   }
 
   private log(message: string) {

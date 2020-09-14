@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DepartmentService } from "../department.service";
 import {Router} from "@angular/router";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-department-new',
@@ -9,21 +10,25 @@ import {Router} from "@angular/router";
 })
 export class DepartmentNewComponent implements OnInit {
   private id: number = 0;
+  public form: FormGroup;
 
   constructor(
-    private service: DepartmentService,
+    public service: DepartmentService,
     private router: Router
 
   ) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
+    this.form = new FormGroup({
+      id: new FormControl(null),
+      name: new FormControl('', Validators.required)
+    });
   }
 
   add(name: string): void {
-    if (!name) { return; }
     let id = 0;
-
-    let allDepartments = this.service.getDepartments().subscribe(value => {
+    let allDepartments = this.service
+      .getDepartments().subscribe(value => {
       this.id = value.length;
       this.id++;
       let department = {
@@ -35,10 +40,5 @@ export class DepartmentNewComponent implements OnInit {
           this.router.navigateByUrl('/department')
         });
     });
-
-
-    this.service.form.reset();
-    this.service.InitializeFormGrope();
   }
-
 }

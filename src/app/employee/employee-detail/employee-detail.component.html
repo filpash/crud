@@ -31,7 +31,8 @@
   <ul class="employee__department-item">
     <li *ngIf="department">
       <a routerLink="/department/{{department.id}}">
-        <span>Department Id:</span> {{department.id}}
+        <span>Department Id:</span> {{department.id}}&nbsp;
+        <span>Department Name:</span> {{department.name}}
       </a>
     </li>
   </ul>

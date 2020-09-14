@@ -6,7 +6,6 @@ import {catchError, map, tap} from 'rxjs/operators';
 import {Departments} from "./departments";
 import { MessageService } from '../message.service';
 import {Employees} from "../employee/employees";
-import { FormGroup, FormControl} from "@angular/forms";
 
 @Injectable({
   providedIn: 'root',
@@ -23,11 +22,6 @@ export class DepartmentService {
     private http: HttpClient,
     private messageService: MessageService) { }
 
-  form: FormGroup = new FormGroup({
-    id: new FormControl(null),
-    name: new FormControl('')
-  })
-
   getDepartments(): Observable<Departments[]> {
     this.messageService.add('EmployeeService: fetched departments');
     return this.http.get<Departments[]>(this.departmentUrl)
@@ -35,15 +29,6 @@ export class DepartmentService {
       tap(_ => this.log('fetched departments')),
       catchError(this.handleError<Departments[]>('getDepartments', []))
     )
-  };
-
-  getEmployees(): Observable<Employees[]> {
-    this.messageService.add('EmployeeService: fetched employees');
-    return this.http.get<Employees[]>(this.employeeUrl)
-      .pipe(
-        tap(_ => this.log('fetched employees')),
-        catchError(this.handleError<Employees[]>('getEmployees', []))
-      )
   };
 
   /** GET departments from the server */
@@ -56,17 +41,10 @@ export class DepartmentService {
   }
 
   /** POST: add a new department to the server */
-  addDepartment(department: { name: string; id: number }): Observable<Departments> {
+  addDepartment(department: { id: number; name: string }): Observable<Departments> {
     return this.http.post<Departments>(this.departmentUrl, department, this.httpOptions).pipe(
       tap((newDepartment: Departments) => this.log(`added department w/ id=${newDepartment.id}`)),
       catchError(this.handleError<Departments>('addDepartment'))
-    );
-  }
-
-  getEmployee(id: number | string) {
-    return this.getEmployees().pipe(
-      map((employees: Employees[]) => employees
-        .find(employee => employee.id === +id))
     );
   }
 
@@ -81,11 +59,20 @@ export class DepartmentService {
     );
   }
 
-  InitializeFormGrope(){
-    this.form.setValue({
-      id: null,
-      name: ''
-    })
+  getEmployees(): Observable<Employees[]> {
+    this.messageService.add('EmployeeService: fetched employees');
+    return this.http.get<Employees[]>(this.employeeUrl)
+      .pipe(
+        tap(_ => this.log('fetched employees')),
+        catchError(this.handleError<Employees[]>('getEmployees', []))
+      )
+  };
+
+  getEmployee(id: number | string) {
+    return this.getEmployees().pipe(
+      map((employees: Employees[]) => employees
+        .find(employee => employee.id === +id))
+    );
   }
 
   private handleError<T>(operation = 'operation', result?: T) {

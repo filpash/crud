@@ -1,5 +1,5 @@
 <h2>Create New Employee</h2>
-<form [formGroup]="service.form" class="normal-form">
+<form [formGroup]="form" (ngSubmit)="add(firstName.value, lastName.value, email.value, departmentId.value)" class="normal-form">
   <mat-grid-list cols="1" rowHeight="300px">
     <mat-grid-tile>
       <div class="controles-container">
@@ -29,13 +29,7 @@
         </mat-form-field>
 
         <div class="add-bottom-padding">
-          <button mat-raised-button color="warn" type="submit"
-                  [disabled]="service.form.invalid"
-                  (click)="add(firstName.value,
-                    lastName.value,
-                    email.value,
-                    departmentId.value)"
-          >Add</button>
+          <button mat-raised-button color="warn" type="submit" [disabled]="!form.valid">Add</button>
         </div>
       </div>
     </mat-grid-tile>
