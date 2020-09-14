@@ -1,7 +1,7 @@
 <h2>Current Employee</h2>
 <mat-card *ngIf="employees">
   <div>
-    <h3>Position: {{ employees.id }}</h3>
+    <h3>Id: {{ employees.id }}</h3>
   </div>
   <div>
     <label>First Name: </label>{{ employees.firstName }}</div>
@@ -30,8 +30,8 @@
 <div class="container">
   <ul class="employee__department-item">
     <li *ngIf="department">
-      <a routerLink="/department/{{department.departmentId}}">
-        <span>Department Id:</span> {{department.departmentId}}
+      <a routerLink="/department/{{department.id}}">
+        <span>Department Id:</span> {{department.id}}
       </a>
     </li>
   </ul>

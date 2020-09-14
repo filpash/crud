@@ -10,27 +10,17 @@ import {Router} from "@angular/router";
 export class DepartmentNewComponent implements OnInit {
   private id: number = 0;
 
-  departments = [
-    { id: 1, departmentId: 1},
-    { id: 2, departmentId: 2},
-    { id: 3, departmentId: 3},
-    { id: 4, departmentId: 4},
-    { id: 5, departmentId: 5},
-    { id: 6, departmentId: 6},
-    { id: 7, departmentId: 7},
-  ];
-
   constructor(
-    public service: DepartmentService,
-    public router: Router
+    private service: DepartmentService,
+    private router: Router
 
   ) { }
 
   ngOnInit(): void {
   }
 
-  add(departmentId: number | string): void {
-    if (!departmentId) { return; }
+  add(name: string): void {
+    if (!name) { return; }
     let id = 0;
 
     let allDepartments = this.service.getDepartments().subscribe(value => {
@@ -38,7 +28,7 @@ export class DepartmentNewComponent implements OnInit {
       this.id++;
       let department = {
         id: this.id,
-        departmentId: departmentId
+        name: name
       };
       this.service.addDepartment(department)
         .subscribe(department => {

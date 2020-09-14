@@ -4,22 +4,14 @@
     <mat-grid-tile>
       <div class="controles-container">
         <input type="hidden" formArrayName="id">
-<!--        <mat-form-field>-->
-<!--          <input #departmentId formControlName="departmentId" matInput placeholder="Department Id">-->
-<!--        </mat-form-field>-->
         <mat-form-field>
-          <mat-select #departmentId formControlName="departmentId" placeholder="Department Id">
-            <mat-option>None</mat-option>
-            <ng-container>
-              <mat-option *ngFor="let department of departments" [value]="department.id">{{department.departmentId}}</mat-option>
-            </ng-container>
-          </mat-select>
+          <input #name formControlName="name" matInput placeholder="Name">
         </mat-form-field>
 
         <div class="add-bottom-padding">
           <button mat-raised-button color="warn" type="submit"
                   [disabled]="service.form.invalid"
-                  (click)="add(departmentId.value)"
+                  (click)="add(name.value)"
           >Add</button>
         </div>
       </div>

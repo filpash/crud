@@ -16,7 +16,7 @@ export class DepartmentListComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
   departments: Departments[];
 
-  displayedColumns: string[] = ['id', 'departmentId'];
+  displayedColumns: string[] = ['id', 'name'];
 
   constructor(
     public service: DepartmentService

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {EmployeeService} from "../employee.service";
 import {Router} from "@angular/router";
+import {DepartmentService} from "../../department/department.service";
 
 
 @Component({
@@ -9,22 +10,19 @@ import {Router} from "@angular/router";
   styleUrls: ['./employee-new.component.scss']
 })
 export class EmployeeNewComponent implements OnInit {
-  departments = [
-    { id: 1, departmentId: 1},
-    { id: 2, departmentId: 2},
-    { id: 3, departmentId: 3},
-    { id: 4, departmentId: 4},
-    { id: 5, departmentId: 5},
-    { id: 6, departmentId: 6},
-    { id: 7, departmentId: 7},
-  ];
+  departments = [];
 
   private id: number = 0;
 
   constructor(
-    public service: EmployeeService,
-    public router: Router
-  ) { }
+    private service: EmployeeService,
+    private router: Router,
+    private departmentService: DepartmentService
+  ) {
+    this.departmentService.getDepartments().subscribe(value => {
+      this.departments = value;
+    });
+  }
 
   ngOnInit(): void {}
 

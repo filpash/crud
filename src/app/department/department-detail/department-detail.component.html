@@ -2,10 +2,10 @@
 
 <mat-card *ngIf="departments">
   <div>
-    <h3>Position: {{ departments.id }}</h3>
+    <h3>Id: {{ departments.id }}</h3>
   </div>
   <div>
-    <label>Department Id: </label>{{ departments.departmentId }}</div>
+    <label>Name: </label>{{ departments.name }}</div>
 
   <button
     class="example-button-item"
@@ -24,7 +24,7 @@
 <div class="container">
   <ul class="department__employee-item">
     <li *ngIf="employees">
-      <a routerLink="/employee/{{employees.departmentId}}">
+      <a routerLink="/employee/{{employees.id}}">
         <span>Full Name:</span> {{employees.firstName}} {{employees.lastName}}
         <span>Email:</span> {{employees.email}}
         <span>Department Id:</span> {{employees.departmentId}}

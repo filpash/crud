@@ -19,15 +19,11 @@
           <mat-error>Email is mandatory</mat-error>
         </mat-form-field>
 
-<!--        <mat-form-field>-->
-<!--          <input #departmentId formControlName="departmentId" matInput placeholder="Department Id">-->
-<!--        </mat-form-field>-->
-
         <mat-form-field>
           <mat-select #departmentId formControlName="departmentId" placeholder="Department Id">
             <mat-option>None</mat-option>
             <ng-container>
-              <mat-option *ngFor="let department of departments" [value]="department.id">{{department.departmentId}}</mat-option>
+              <mat-option *ngFor="let department of departments" [value]="department.id">{{department.id}}</mat-option>
             </ng-container>
           </mat-select>
         </mat-form-field>

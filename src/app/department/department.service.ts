@@ -25,7 +25,7 @@ export class DepartmentService {
 
   form: FormGroup = new FormGroup({
     id: new FormControl(null),
-    departmentId: new FormControl('')
+    name: new FormControl('')
   })
 
   getDepartments(): Observable<Departments[]> {
@@ -56,7 +56,7 @@ export class DepartmentService {
   }
 
   /** POST: add a new department to the server */
-  addDepartment(department: Departments): Observable<Departments> {
+  addDepartment(department: { name: string; id: number }): Observable<Departments> {
     return this.http.post<Departments>(this.departmentUrl, department, this.httpOptions).pipe(
       tap((newDepartment: Departments) => this.log(`added department w/ id=${newDepartment.id}`)),
       catchError(this.handleError<Departments>('addDepartment'))
@@ -84,7 +84,7 @@ export class DepartmentService {
   InitializeFormGrope(){
     this.form.setValue({
       id: null,
-      departmentId: ''
+      name: ''
     })
   }
 
