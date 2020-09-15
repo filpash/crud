@@ -3,9 +3,9 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 import {Observable, of} from 'rxjs';
 import {catchError, map, tap} from 'rxjs/operators';
-import {Departments} from "./departments";
+import {Departments} from "../model/content/departments.model";
 import { MessageService } from '../message.service';
-import {Employees} from "../employee/employees";
+import {Employees} from "../model/content/employees.model";
 
 @Injectable({
   providedIn: 'root',

@@ -1,9 +1,9 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {EmployeeService} from "../employee.service";
+import {EmployeeService} from "../../../service/employee.service";
 import {MatPaginator} from "@angular/material/paginator";
 import { MatSort } from "@angular/material/sort";
-import { Employees } from "../employees";
-import {Departments} from "../../department/departments";
+import { Employees } from "../../../model/content/employees.model";
+import {Departments} from "../../../model/content/departments.model";
 
 @Component({
   selector: 'app-employee-list',

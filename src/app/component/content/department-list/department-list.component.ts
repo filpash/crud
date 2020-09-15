@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {DepartmentService} from "../department.service";
-import {Departments} from "../departments";
+import {DepartmentService} from "../../../service/department.service";
+import {Departments} from "../../../model/content/departments.model";
 import {MatPaginator} from "@angular/material/paginator";
 import {MatSort} from "@angular/material/sort";
 import {MatTableDataSource} from "@angular/material/table";

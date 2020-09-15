@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DepartmentService } from "../department.service";
+import { DepartmentService } from "../../../service/department.service";
 import {Router} from "@angular/router";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 
@@ -10,7 +10,11 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 })
 export class DepartmentNewComponent implements OnInit {
   private id: number = 0;
-  public form: FormGroup;
+
+  form = new FormGroup({
+  id: new FormControl(null),
+  name: new FormControl('', Validators.required)
+});
 
   constructor(
     public service: DepartmentService,
@@ -18,12 +22,7 @@ export class DepartmentNewComponent implements OnInit {
 
   ) { }
 
-  ngOnInit() {
-    this.form = new FormGroup({
-      id: new FormControl(null),
-      name: new FormControl('', Validators.required)
-    });
-  }
+  ngOnInit(): void {}
 
   add(name: string): void {
     let id = 0;

@@ -1,4 +1,4 @@
-import { Departments } from "./departments";
+import { Departments } from "../model/content/departments.model";
 
 export const DEPARTMENTS: Departments[] = [
   { id: 1, name: 'Marketing'},

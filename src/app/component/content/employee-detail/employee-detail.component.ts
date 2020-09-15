@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {Employees} from "../employees";
+import {Employees} from "../../../model/content/employees.model";
 import {ActivatedRoute, Router} from "@angular/router";
-import {EmployeeService} from "../employee.service";
-import {Departments} from "../../department/departments";
-import {DepartmentService} from "../../department/department.service";
+import {EmployeeService} from "../../../service/employee.service";
+import {Departments} from "../../../model/content/departments.model";
+import {DepartmentService} from "../../../service/department.service";
 
 @Component({
   selector: 'app-employee-detail',

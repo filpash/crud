@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { InMemoryDbService } from 'angular-in-memory-web-api';
-import {Departments} from "./department/departments";
-import {Employees} from "./employee/employees";
+import {Departments} from "./model/content/departments.model";
+import {Employees} from "./model/content/employees.model";
 
 @Injectable({
   providedIn: 'root'

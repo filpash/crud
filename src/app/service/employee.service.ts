@@ -3,10 +3,10 @@ import { Injectable } from '@angular/core';
 import {Observable, of} from 'rxjs';
 import { catchError, tap, map } from 'rxjs/operators';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import { Employees } from "./employees";
+import { Employees } from "../model/content/employees.model";
 import { MessageService } from '../message.service';
-import {Departments} from "../department/departments";
-import {DEPARTMENTS} from "../department/mock-departments";
+import {Departments} from "../model/content/departments.model";
+import {DEPARTMENTS} from "../data/mock-departments";
 
 @Injectable({
   providedIn: 'root',
@@ -61,7 +61,7 @@ export class EmployeeService {
                 firstName: string;
                 lastName: string;
                 email: string;
-                departmentId: string | number; }): Observable<Employees> {
+                departmentId: number; }): Observable<Employees> {
     return this.http.post<Employees>(this.employeeUrl, employee, this.httpOptions).pipe(
       tap((newEmployee: Employees) => this.log(`added employee w/ id=${newEmployee.id}`)),
       catchError(this.handleError<Employees>('addEmployee'))
